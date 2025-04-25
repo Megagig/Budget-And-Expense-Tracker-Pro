@@ -1,10 +1,12 @@
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import 'dotenv/config';
-import mongoose from 'mongoose';
+import connectDB from './config/db';
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string);
+connectDB();
+
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -13,12 +15,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
-// Test endpoint
-app.get('/api/test', async (req: Request, res: Response) => {
-  res.json({ message: 'Hello from Express endpoint' });
+// root route
+app.get('/', (req, res) => {
+  res.send('API is running successfully');
 });
-
-// Start the server
-app.listen(3000, () => {
-  console.log('Server is running on localhost:3000');
+// start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
