@@ -19,6 +19,6 @@ app.get('/api/test', async (req: Request, res: Response) => {
 });
 
 // Start the server
-app.listen(7000, () => {
-  console.log('Server is running on localhost:7000');
+app.listen(3000, () => {
+  console.log('Server is running on localhost:3000');
 });
